@@ -30,8 +30,13 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "users/new";
         }
-        userService.create(request.getName(), request.getEmail());
-
+        try {
+            userService.create(request.getName(), request.getEmail());
+        }
+        catch (IllegalArgumentException e) {
+            bindingResult.rejectValue("email", "duplicate", e.getMessage());
+            return "users/new";
+        }
         return "redirect:/home";
     }
 }
