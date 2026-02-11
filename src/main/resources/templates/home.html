@@ -5,6 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-  <span>Hello</span>
+  <h2>マイページ</h2>
+  <h3>科目一覧</h3>
+　<ul>
+      <list th:each="s : ${subjects}">
+          <span th:text="${s.title}"></span>
+      </list>
+  </ul>
 </body>
 </html>
