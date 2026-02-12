@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class SubjectController {
@@ -28,7 +29,7 @@ public class SubjectController {
 
     @PostMapping("/subjects")
     public String create(@Valid @ModelAttribute("subjectCreateRequest") SubjectCreateRequest request,
-                       BindingResult bindingResult) {
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Long userId = 1L;
         if (bindingResult.hasErrors()) {
             return "subjects/new";
@@ -40,11 +41,13 @@ public class SubjectController {
             bindingResult.rejectValue("title","duplicate",e.getMessage());
             return "subjects/new";
         }
+        redirectAttributes.addFlashAttribute("message","科目の登録が完了しました");
         return "redirect:/home";
     }
     @PostMapping("/subjects/{id}/delete")
-    public String delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         subjectService.delete(id);
+        redirectAttributes.addFlashAttribute("message","科目の削除が完了しました");
         return "redirect:/home";
     }
 }
