@@ -10,6 +10,9 @@
 　<ul>
       <list th:each="s : ${subjects}">
           <span th:text="${s.title}"></span>
+          <form th:action="@{/subjects/{id}/delete(id=${s.id})}" method="post">
+              <button type="submit">削除</button>
+          </form>
       </list>
   </ul>
 </body>
