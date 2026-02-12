@@ -31,5 +31,9 @@ public class SubjectService {
         }
         return subjectRepository.save(subject);
     }
+
+    public void delete(Long id) {
+        subjectRepository.deleteById(id);
+    }
 }
 
