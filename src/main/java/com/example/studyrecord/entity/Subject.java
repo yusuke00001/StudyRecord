@@ -38,4 +38,5 @@ public class Subject {
     public User getUser() {
         return user;
     }
+    public List<Workbook> getWorkbooks() { return workbooks; }
 }

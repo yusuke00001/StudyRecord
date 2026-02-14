@@ -20,7 +20,7 @@ public class SubjectService {
     }
 
     public List<Subject> index(Long userId) {
-        return subjectRepository.findByUser_Id(userId);
+        return subjectRepository.findByUserIdWithWorkbooks(userId);
     }
 
     public Subject create(String title, Long userId) {
