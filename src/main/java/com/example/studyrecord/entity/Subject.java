@@ -2,6 +2,8 @@ package com.example.studyrecord.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "subjects")
 public class Subject {
@@ -15,6 +17,9 @@ public class Subject {
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "subject")
+    private List<Workbook> workbooks;
 
     public Subject() {
     }
