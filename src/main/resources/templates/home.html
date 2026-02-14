@@ -9,12 +9,12 @@
   <h2>マイページ</h2>
   <h3>科目一覧</h3>
 　<ul>
-      <list th:each="s : ${subjects}">
+      <li th:each="s : ${subjects}">
           <span th:text="${s.title}"></span>
           <form th:action="@{/subjects/{id}/delete(id=${s.id})}" method="post">
               <button type="submit">削除</button>
           </form>
-      </list>
+      </li>
   </ul>
 </body>
 </html>
