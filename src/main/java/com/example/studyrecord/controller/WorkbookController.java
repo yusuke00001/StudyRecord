@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class WorkbookController {
@@ -27,7 +28,7 @@ public class WorkbookController {
     }
     @PostMapping("/subjects/{subjectId}/workbooks")
     public String create(@PathVariable Long subjectId, @Valid @ModelAttribute("workbookCreateRequest") WorkbookCreateRequest request,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "workbooks/new";
         }
@@ -38,6 +39,7 @@ public class WorkbookController {
             bindingResult.rejectValue("title", "duplicate", e.getMessage());
             return "workbooks/new";
         }
+        redirectAttributes.addFlashAttribute("message","参考書の登録が完了しました");
         return "redirect:/home";
     }
 }
