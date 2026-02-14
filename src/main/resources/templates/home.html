@@ -14,6 +14,12 @@
           <form th:action="@{/subjects/{id}/delete(id=${s.id})}" method="post">
               <button type="submit">削除</button>
           </form>
+          <ul>
+              <li th:if="${#lists.isEmpty(s.workbooks)}">参考書は登録されておりません</li>
+              <li th:each="w : ${s.workbooks}">
+                  <span th:text="${w.title}"></span>
+              </li>
+          </ul>
       </li>
   </ul>
 </body>
