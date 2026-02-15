@@ -7,6 +7,7 @@ import com.example.studyrecord.repository.WorkbookRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class StudyRecordService {
@@ -23,5 +24,9 @@ public class StudyRecordService {
         Workbook workbook = workbookRepository.findById(workbookId).orElseThrow(()-> new IllegalArgumentException("参考書が存在しません"));
         StudyRecord studyRecord = new StudyRecord(studyDate, questionNumber,link, result, workbook);
         return studyRecordRepository.save(studyRecord);
+    }
+
+    public List<StudyRecord> getStudyRecordByWorkbook(Long workbookId) {
+        return studyRecordRepository.findByWorkbookId(workbookId);
     }
 }

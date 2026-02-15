@@ -1,6 +1,7 @@
 package com.example.studyrecord.controller;
 
 import com.example.studyrecord.dto.request.StudyRecordCreateRequest;
+import com.example.studyrecord.entity.StudyRecord;
 import com.example.studyrecord.service.StudyRecordService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class StudyRecordController {
@@ -26,6 +29,13 @@ public class StudyRecordController {
         model.addAttribute("workbookId", workbookId);
         model.addAttribute("studyRecordCreateRequest", new StudyRecordCreateRequest());
         return "studyRecords/new";
+    }
+
+    @GetMapping("/subjects/{subjectId}/workbooks/{workbookId}/studyRecords")
+    public String indexStudyRecord(@PathVariable Long subjectId, @PathVariable Long workbookId, Model model) {
+        List<StudyRecord> studyRecords = studyRecordService.getStudyRecordByWorkbook(workbookId);
+        model.addAttribute("studyRecords", studyRecords);
+        return "studyRecords/index";
     }
 
     @PostMapping("/subjects/{subjectId}/workbooks/{workbookId}/studyRecords")
