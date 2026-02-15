@@ -1,4 +1,4 @@
-StudyRecord
+### StudyRecord
 
 ■ アプリ概要
 
