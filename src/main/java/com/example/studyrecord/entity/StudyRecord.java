@@ -29,9 +29,11 @@ public class StudyRecord {
     public StudyRecord() {
     }
 
-    public StudyRecord(LocalDate studyDate, String questionNumber, Workbook workbook) {
+    public StudyRecord(LocalDate studyDate, String questionNumber, String link, Boolean result, Workbook workbook) {
         this.studyDate = studyDate;
         this.questionNumber = questionNumber;
+        this.link = link;
+        this.result = result;
         this.workbook = workbook;
     }
 
